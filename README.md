@@ -1,95 +1,62 @@
-# Clinica Dental Don Benito - One Page React + Node
+# Clinica Dental Don Benito - Next.js + TypeScript
 
-Proyecto preparado para BanaHosting con arquitectura hibrida:
+Proyecto migrado a una sola aplicacion Next.js con TypeScript.
 
-- `frontend/`: React + Vite (sitio estatico)
-- `backend/`: Node + Express (API de resenas de Google con cache)
+## Arquitectura
+
+- `app/page.tsx`: one page principal
+- `components/ReviewsSlider.tsx`: slider de resenas (cliente)
+- `app/api/reviews/route.ts`: API para Google Reviews con cache en memoria
+- `server.js`: servidor Node para despliegue en BanaHosting (Setup Node.js App)
+
+## Variables de entorno
+
+Crea `.env.local` a partir de `.env.example`:
+
+```bash
+cp .env.example .env.local
+```
+
+Variables:
+
+- `NEXT_PUBLIC_WHATSAPP_NUMBER`: numero WhatsApp con prefijo pais, sin `+`
+- `NEXT_PUBLIC_WHATSAPP_TEXT`: texto URL encoded
+- `GOOGLE_PLACES_API_KEY`: API key con Places API habilitada
+- `GOOGLE_PLACE_ID`: Place ID de la clinica
+- `REVIEWS_CACHE_TTL_HOURS`: horas de cache (6 recomendado)
 
 ## Desarrollo local
 
-Terminal 1:
-
 ```bash
-cd backend
-cp .env.example .env
 npm install
 npm run dev
 ```
 
-Terminal 2:
+Abre `http://localhost:3000`.
+
+## Build y arranque en produccion
 
 ```bash
-cd frontend
-cp .env.example .env
-npm install
-npm run dev
-```
-
-## 1) Frontend (React)
-
-```bash
-cd frontend
-cp .env.example .env
-npm install
 npm run build
-```
-
-Variables (`frontend/.env`):
-
-- `VITE_API_BASE_URL` -> URL publica del backend (`https://api.tudominio.com` o similar)
-- `VITE_WHATSAPP_NUMBER` -> numero con prefijo pais, sin `+`
-- `VITE_WHATSAPP_TEXT` -> texto URL encoded
-
-Salida de build:
-
-- `frontend/dist`
-
-Sube el contenido de `dist` a `public_html`.
-
-## 2) Backend (Node)
-
-```bash
-cd backend
-cp .env.example .env
-npm install
 npm run start
 ```
 
-Variables (`backend/.env`):
+## Despliegue en BanaHosting (Node)
 
-- `PORT` -> puerto de la app Node (el que configure BanaHosting)
-- `CORS_ORIGIN` -> dominio del frontend, ej: `https://tudominio.com`
-- `GOOGLE_PLACES_API_KEY` -> API key con Places API habilitada
-- `GOOGLE_PLACE_ID` -> Place ID de la clinica
-- `REVIEWS_CACHE_TTL_HOURS` -> horas de cache (6 recomendado)
+1. Subir proyecto al servidor (incluyendo `app`, `components`, `lib`, `public`, `package.json`, `server.js`).
+2. En cPanel abrir `Setup Node.js App`.
+3. Elegir version de Node compatible (20+ recomendado).
+4. Seleccionar carpeta del proyecto.
+5. Startup file: `server.js`.
+6. Configurar variables de entorno.
+7. Ejecutar instalacion de dependencias y luego `npm run build`.
+8. Reiniciar la app Node.
 
-Endpoints:
+## Endpoints
 
-- `GET /api/health`
-- `GET /api/reviews`
+- `GET /api/health`: estado basico del servicio
+- `GET /api/reviews`: devuelve resenas de Google (con cache)
 
-## 3) Configuracion en BanaHosting
+## Nota sobre estructura antigua
 
-### Frontend estatico
-
-1. Genera `frontend/dist`.
-2. Sube el contenido a `public_html`.
-
-### Backend Node
-
-1. En cPanel usa `Setup Node.js App`.
-2. Selecciona la carpeta `backend`.
-3. Define startup file: `src/server.js`.
-4. Carga variables de entorno del backend.
-5. Instala dependencias y reinicia la app.
-
-Si frontend y backend no comparten dominio/subdominio, ajusta `CORS_ORIGIN`.
-
-## 4) Obtener Google Place ID
-
-Opcion rapida: usa Place ID Finder de Google Maps Platform y copia el id del negocio.
-
-## 5) Notas
-
-- El backend cachea resenas para reducir consumo de cuota en Google.
-- Si falla la API, el frontend muestra resenas fallback para no romper el slider.
+Las carpetas `frontend/` y `backend/` se mantienen como referencia de la version previa.
