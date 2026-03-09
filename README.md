@@ -32,7 +32,14 @@ npm install
 npm run dev
 ```
 
-Abre `http://localhost:3000`.
+Abre `http://localhost:3001`.
+
+El script `npm run dev` ya usa el puerto `3001` por defecto.
+Si necesitas otro puerto puntualmente:
+
+```bash
+npm run dev -- -p 3002
+```
 
 ## Build y arranque en produccion
 
