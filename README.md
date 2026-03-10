@@ -2,6 +2,14 @@
 
 Proyecto migrado a una sola aplicacion Next.js con TypeScript.
 
+## Secciones de la one-page
+
+- Portada
+- Servicios
+- Sobre nosotras
+- Filosofia y valores
+- Contacto
+
 ## Arquitectura
 
 - `app/page.tsx`: one page principal
@@ -21,6 +29,9 @@ Variables:
 
 - `NEXT_PUBLIC_WHATSAPP_NUMBER`: numero WhatsApp con prefijo pais, sin `+`
 - `NEXT_PUBLIC_WHATSAPP_TEXT`: texto URL encoded
+- `NEXT_PUBLIC_PHONE_NUMBER`: telefono para enlace `tel:`
+- `NEXT_PUBLIC_PHONE_DISPLAY`: telefono visible en la web
+- `NEXT_PUBLIC_CLINIC_EMAIL`: email de contacto
 - `GOOGLE_PLACES_API_KEY`: API key con Places API habilitada
 - `GOOGLE_PLACE_ID`: Place ID de la clinica
 - `REVIEWS_CACHE_TTL_HOURS`: horas de cache (6 recomendado)
@@ -35,6 +46,7 @@ npm run dev
 Abre `http://localhost:3001`.
 
 El script `npm run dev` ya usa el puerto `3001` por defecto.
+En desarrollo usa Turbopack para evitar inconsistencias de cache de webpack.
 Si necesitas otro puerto puntualmente:
 
 ```bash
@@ -63,6 +75,7 @@ npm run start
 
 - `GET /api/health`: estado basico del servicio
 - `GET /api/reviews`: devuelve resenas de Google (con cache)
+  Si falta configuracion de Google o hay error externo, responde fallback de forma segura.
 
 ## Nota sobre estructura antigua
 
