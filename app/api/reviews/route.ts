@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import type { Review, ReviewsPayload } from '../../../lib/reviews';
+import { fallbackReviews, type Review, type ReviewsPayload } from '../../../lib/reviews';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -71,8 +71,22 @@ async function fetchGoogleReviews(): Promise<ReviewsPayload> {
   };
 }
 
+function buildFallbackPayload(errorMessage?: string): ReviewsPayload & { fallback: true; error?: string } {
+  return {
+    place_name: 'Clinica Dental Don Benito',
+    reviews: fallbackReviews,
+    cached: false,
+    fallback: true,
+    ...(errorMessage ? { error: errorMessage } : {})
+  };
+}
+
 export async function GET() {
   try {
+    if (!googleApiKey || !googlePlaceId) {
+      return NextResponse.json(buildFallbackPayload('Missing GOOGLE_PLACES_API_KEY or GOOGLE_PLACE_ID'));
+    }
+
     if (isCacheValid() && reviewCache.data) {
       return NextResponse.json({ ...reviewCache.data, cached: true });
     }
@@ -86,12 +100,6 @@ export async function GET() {
     return NextResponse.json({ ...freshData, cached: false });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json(
-      {
-        message: 'No se pudieron obtener las resenas de Google.',
-        error: message
-      },
-      { status: 500 }
-    );
+    return NextResponse.json(buildFallbackPayload(message));
   }
 }
