@@ -4,7 +4,7 @@ import ReviewsSlider from '../components/ReviewsSlider';
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '34600000000';
 const WHATSAPP_TEXT =
   process.env.NEXT_PUBLIC_WHATSAPP_TEXT ||
-  'Hola%20quiero%20pedir%20una%20cita%20en%20Clinica%20Dental%20Don%20Benito';
+  'Hola%20quiero%20pedir%20una%20cita%20en%20Cl%C3%ADnica%20Dental%20Don%20Benito';
 const PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER || '924857567';
 const PHONE_DISPLAY = process.env.NEXT_PUBLIC_PHONE_DISPLAY || '924 857 567';
 const CLINIC_EMAIL = process.env.NEXT_PUBLIC_CLINIC_EMAIL || 'hola@clinicadentaldonbenito.es';
@@ -21,28 +21,28 @@ const topBarPhoneUrl = `tel:${TOPBAR_PHONE_NUMBER}`;
 
 const features = [
   {
-    title: 'Implantologia',
-    description: 'Recupera funcionalidad y estetica con planes adaptados a cada caso clinico.'
+    title: 'Implantología',
+    description: 'Recupera funcionalidad y estética con planes adaptados a cada caso clínico.'
   },
   {
-    title: 'Cirugia oral',
-    description: 'Procedimientos precisos, seguimiento cercano y una recuperacion guiada paso a paso.'
+    title: 'Cirugía oral',
+    description: 'Procedimientos precisos, seguimiento cercano y una recuperación guiada paso a paso.'
   },
   {
     title: 'Ortodoncia',
-    description: 'Opciones invisibles y tradicionales para mejorar alineacion, mordida y confort.'
+    description: 'Opciones invisibles y tradicionales para mejorar alineación, mordida y confort.'
   },
   {
-    title: 'Estetica dental',
-    description: 'Tratamientos disenados para lograr una sonrisa natural, equilibrada y saludable.'
+    title: 'Estética dental',
+    description: 'Tratamientos diseñados para lograr una sonrisa natural, equilibrada y saludable.'
   },
   {
     title: 'Periodoncia',
-    description: 'Cuidado integral de encias para prevenir molestias y proteger la salud bucodental.'
+    description: 'Cuidado integral de encías para prevenir molestias y proteger la salud bucodental.'
   },
   {
-    title: 'Odontologia general',
-    description: 'Prevencion, diagnostico y tratamiento con tecnologia actual y enfoque humano.'
+    title: 'Odontología general',
+    description: 'Prevención, diagnóstico y tratamiento con tecnología actual y enfoque humano.'
   }
 ];
 
@@ -67,7 +67,7 @@ const waveShapes = {
 
 type WaveShapeKey = keyof typeof waveShapes;
 
-const weekdayLabels = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+const weekdayLabels = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 const businessHoursByWeekday: Record<number, string> = {
   0: 'Cerrado',
   1: '10:00-14:00, 16:00-20:00',
@@ -235,7 +235,7 @@ export default function Home() {
               href={MAPS_URL}
               target="_blank"
               rel="noreferrer"
-              aria-label="Abrir ubicacion en Google Maps"
+              aria-label="Abrir ubicación en Google Maps"
             >
               <span className="top-bar-icon">
                 <LocationIcon />
@@ -266,15 +266,23 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="inner nav-shell">
+        <div className="nav-shell">
           <a href="#home" className="brand">
             <Image src="/logo-don-benito.png" alt="Clinica Dental Don Benito" width={460} height={132} priority />
           </a>
-          <nav className="main-nav" aria-label="Navegacion principal">
-            <a href="#home">Portada</a>
+
+          <input type="checkbox" id="nav-menu-toggle" className="nav-toggle" />
+          <label className="nav-toggle-button" htmlFor="nav-menu-toggle" aria-label="Abrir menú principal">
+            <span />
+            <span />
+            <span />
+          </label>
+
+          <nav className="main-nav" aria-label="Navegación principal">
+            <a href="#home">Inicio</a>
             <a href="#services">Servicios</a>
             <a href="#about">Sobre nosotras</a>
-            <a href="#philosophy-values">Filosofia y valores</a>
+            <a href="#philosophy-values">Filosofía y valores</a>
             <a href="#contact">Contacto</a>
           </nav>
         </div>
@@ -284,35 +292,34 @@ export default function Home() {
         <section className="section section-home" id="home">
           <div className="inner hero-grid">
             <div className="hero-copy">
-              <p className="section-chip">Portada</p>
-              <h1>Odontologia de precision con una experiencia humana y tranquila.</h1>
+              <h1>Siempre contigo</h1>
               <p>
-                En Clinica Dental Don Benito te acompanamos desde la primera visita para que entiendas
-                tu diagnostico, tomes decisiones con seguridad y avances con confianza en cada
-                tratamiento.
+                Somos una clínica dental liderada por mujeres, pensada para acompañarte en cada etapa
+                de tu salud bucodental.
+                <br />
+                Unimos criterio clínico, tecnología de última generación y una comunicación clara para
+                ofrecerte soluciones eficaces en un entorno cercano, tranquilo y seguro desde la primera
+                visita.
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                  Reservar por WhatsApp
+                  Pide cita por WhatsApp
                 </a>
-                <a className="btn btn-soft" href={phoneUrl}>
+                <a className="btn btn-soft hero-call-mobile" href={phoneUrl}>
                   Llamar ahora
                 </a>
               </div>
             </div>
 
-            <aside className="highlight-panel" aria-label="Puntos clave de la clinica">
-              <h2>Atencion integral para toda la familia</h2>
-              <ul>
-                <li>Explicaciones claras y trato cercano</li>
-                <li>Tecnologia actual para mayor precision</li>
-                <li>Planes personalizados y seguimiento real</li>
-              </ul>
-              <div className="quick-contact">
-                <a href={phoneUrl}>{PHONE_DISPLAY}</a>
-                <a href={mailUrl}>{CLINIC_EMAIL}</a>
-              </div>
-            </aside>
+            <figure className="hero-photo" aria-label="Clínica Dental Don Benito">
+              <Image
+                src="/clinica-dental-don-benito.webp"
+                alt="Equipo de Clínica Dental Don Benito"
+                width={1200}
+                height={900}
+                className="hero-photo-image"
+              />
+            </figure>
           </div>
           <WaveDivider variant="home" />
         </section>
@@ -321,15 +328,13 @@ export default function Home() {
           <div className="inner services-layout">
             <div className="services-top">
               <div className="services-intro">
-                <p className="section-chip">Servicios</p>
                 <h2>Tratamientos dentales adaptados a tu ritmo</h2>
                 <p className="lead">
-                  Combinamos experiencia clinica y metodologia para ofrecer soluciones eficaces, desde
-                  prevencion y revision hasta tratamientos avanzados.
+                  Combinamos experiencia clínica y metodología para ofrecer soluciones eficaces, desde
+                  prevención y revisión hasta tratamientos avanzados.
                 </p>
               </div>
-              <aside className="reviews-block" aria-label="Resenas de pacientes">
-                <p className="section-chip">Opiniones</p>
+              <aside className="reviews-block" aria-label="Reseñas de pacientes">
                 <h3>Lo que valoran quienes ya se trataron con nosotras</h3>
                 <ReviewsSlider />
               </aside>
@@ -350,26 +355,25 @@ export default function Home() {
         <section className="section section-about" id="about">
           <div className="inner about-grid">
             <div>
-              <p className="section-chip">Sobre nosotras</p>
-              <h2>Un proyecto nacido para cuidar con cercania y rigor profesional</h2>
+              <h2>Un proyecto nacido para cuidar con cercanía y rigor profesional</h2>
               <p className="lead">
-                Somos un equipo femenino que entiende la odontologia como una combinacion de ciencia,
-                escucha y acompanamiento. Cada caso se aborda con respeto, criterio medico y atencion
+                Somos un equipo femenino que entiende la odontología como una combinación de ciencia,
+                escucha y acompañamiento. Cada caso se aborda con respeto, criterio médico y atención
                 al detalle.
               </p>
             </div>
             <div className="about-cards">
               <article>
                 <h3>Escucha activa</h3>
-                <p>Primero comprendemos tu situacion para definir juntas el mejor camino.</p>
+                <p>Primero comprendemos tu situación para definir juntas el mejor camino.</p>
               </article>
               <article>
-                <h3>Decision informada</h3>
+                <h3>Decisión informada</h3>
                 <p>Te mostramos alternativas reales para que elijas con tranquilidad.</p>
               </article>
               <article>
-                <h3>Continuidad clinica</h3>
-                <p>Seguimos tu evolucion para mantener resultados funcionales y estables.</p>
+                <h3>Continuidad clínica</h3>
+                <p>Seguimos tu evolución para mantener resultados funcionales y estables.</p>
               </article>
             </div>
           </div>
@@ -378,16 +382,15 @@ export default function Home() {
 
         <section className="section section-philosophy" id="philosophy-values">
           <div className="inner">
-            <p className="section-chip">Filosofia y valores</p>
             <h2>Creemos en una salud bucodental que impacta en tu bienestar diario</h2>
             <div className="values-row">
               <article>
-                <h3>Prevencion como base</h3>
+                <h3>Prevención como base</h3>
                 <p>Trabajamos a tiempo para evitar problemas mayores y mantener estabilidad oral.</p>
               </article>
               <article>
                 <h3>Transparencia total</h3>
-                <p>Explicamos diagnostico, proceso y evolucion sin rodeos ni tecnicismos innecesarios.</p>
+                <p>Explicamos diagnóstico, proceso y evolución sin rodeos ni tecnicismos innecesarios.</p>
               </article>
               <article>
                 <h3>Excelencia cercana</h3>
@@ -401,11 +404,10 @@ export default function Home() {
         <section className="section section-contact section-last" id="contact">
           <div className="inner contact-layout">
             <div>
-              <p className="section-chip">Contacto</p>
               <h2>Tu siguiente paso dental puede empezar hoy</h2>
               <p className="lead">
                 Si quieres valorar tu caso, resolver una molestia o planificar un tratamiento, estamos
-                disponibles para ayudarte de forma rapida y clara.
+                disponibles para ayudarte de forma rápida y clara.
               </p>
             </div>
             <div className="contact-actions">
