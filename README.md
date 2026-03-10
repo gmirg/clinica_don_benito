@@ -46,11 +46,19 @@ npm run dev
 Abre `http://localhost:3001`.
 
 El script `npm run dev` ya usa el puerto `3001` por defecto.
-En desarrollo usa Turbopack para evitar inconsistencias de cache de webpack.
+En desarrollo usa `next dev` (Webpack) para mayor estabilidad con hot-reload y limpia
+automaticamente caches locales (`.next-dev` y `.next`) al arrancar.
 Si necesitas otro puerto puntualmente:
 
 ```bash
 npm run dev -- -p 3002
+```
+
+Si en desarrollo aparece un error `ENOENT` dentro de `.next-dev/server/.../app-build-manifest.json`
+(o en `.next/server/...` de una sesion anterior):
+
+```bash
+npm run dev
 ```
 
 ## Build y arranque en produccion
