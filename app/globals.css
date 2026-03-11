@@ -531,6 +531,17 @@ a {
   filter: brightness(0) invert(1);
 }
 
+.service-card-icon-large {
+  width: 135px;
+  height: 135px;
+  font-size: 7.8rem;
+}
+
+.service-card-icon-image-large {
+  width: 135px;
+  height: 135px;
+}
+
 .service-card-content {
   display: grid;
   justify-items: center;

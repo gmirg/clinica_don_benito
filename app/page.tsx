@@ -39,16 +39,20 @@ const features = [
   },
   {
     title: 'Ortodoncia invisible y tradicional',
+    icon: '/icons/orthodontics.svg',
     description:
       'Corregimos alineación y mordida con alineadores transparentes o brackets, según lo que mejor encaje con tu caso y tu ritmo.'
   },
   {
     title: 'Periodoncia y cuidado de encías',
+    icon: '/icons/periodontics.svg',
     description:
       'Tratamos gingivitis y periodontitis para frenar su avance, proteger el soporte dental y mejorar la salud bucodental global.'
   },
   {
     title: 'Odontología general y preventiva',
+    icon: '/icons/general-dentistry.svg',
+    iconSize: 'large',
     description:
       'Incluimos revisiones, limpiezas y tratamientos conservadores para detectar a tiempo cualquier problema y evitar complicaciones.'
   },
@@ -381,14 +385,16 @@ export default function Home() {
               {features.map((feature) => (
                 <article className="service-card" key={feature.title}>
                   <div className="service-card-visual" aria-hidden="true">
-                    <span className="service-card-icon">
+                    <span
+                      className={`service-card-icon${feature.iconSize === 'large' ? ' service-card-icon-large' : ''}`}
+                    >
                       {feature.icon ? (
                         <Image
                           src={feature.icon}
                           alt=""
-                          width={100}
-                          height={100}
-                          className="service-card-icon-image"
+                          width={feature.iconSize === 'large' ? 135 : 100}
+                          height={feature.iconSize === 'large' ? 135 : 100}
+                          className={`service-card-icon-image${feature.iconSize === 'large' ? ' service-card-icon-image-large' : ''}`}
                         />
                       ) : (
                         '+'
