@@ -1,16 +1,60 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import type { Review, ReviewsPayload } from '../lib/reviews';
 import { fallbackReviews } from '../lib/reviews';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-function renderRating(rating = 5): string {
-  const rounded = Math.max(1, Math.min(5, Math.round(rating)));
-  return `${rounded}/5`;
+function clampRating(rating = 5): number {
+  return Math.max(1, Math.min(5, Math.round(rating)));
+}
+
+function getInitials(name: string): string {
+  const cleanName = name.trim();
+  if (!cleanName) {
+    return 'P';
+  }
+
+  const chunks = cleanName.split(/\s+/).filter(Boolean);
+  const initials = chunks
+    .slice(0, 2)
+    .map((chunk) => chunk[0]?.toUpperCase() || '')
+    .join('');
+
+  return initials || 'P';
+}
+
+function shortReviewText(text: string): string {
+  const cleanText = text.trim();
+  if (!cleanText) {
+    return 'Opinión compartida por paciente.';
+  }
+
+  return cleanText.length > 210 ? `${cleanText.slice(0, 207).trimEnd()}...` : cleanText;
+}
+
+function ensureMinimumSlides(sourceReviews: Review[], minimum = 5): Review[] {
+  if (sourceReviews.length === 0) {
+    return fallbackReviews.slice(0, minimum);
+  }
+
+  if (sourceReviews.length >= minimum) {
+    return sourceReviews;
+  }
+
+  const extended = [...sourceReviews];
+  let cursor = 0;
+  while (extended.length < minimum) {
+    extended.push(sourceReviews[cursor % sourceReviews.length]);
+    cursor += 1;
+  }
+
+  return extended;
 }
 
 export default function ReviewsSlider() {
@@ -46,26 +90,57 @@ export default function ReviewsSlider() {
     };
   }, []);
 
+  const displayReviews = ensureMinimumSlides(reviews, 5);
+
   return (
     <div className="reviews-wrapper">
-      <p className="reviews-source">Resenas de {sourceName}</p>
+      <p className="reviews-source">Reseñas de {sourceName}</p>
       <Swiper
-        modules={[Autoplay, Pagination]}
+        className="reviews-carousel"
+        modules={[Autoplay, Pagination, Navigation]}
         autoplay={{ delay: 4500, disableOnInteraction: false }}
         pagination={{ clickable: true }}
-        loop={reviews.length > 1}
-        spaceBetween={18}
+        navigation={displayReviews.length > 1}
+        loop={displayReviews.length > 1}
+        centeredSlides
+        watchSlidesProgress
+        watchOverflow={false}
+        speed={650}
+        spaceBetween={0}
         breakpoints={{
-          0: { slidesPerView: 1 },
-          840: { slidesPerView: 2 }
+          0: { slidesPerView: 1.08, spaceBetween: 12 },
+          680: { slidesPerView: 1.35, spaceBetween: 14 },
+          980: { slidesPerView: 2.2, spaceBetween: -48 },
+          1280: { slidesPerView: 3, spaceBetween: -72 }
         }}
       >
-        {reviews.map((review, index) => (
-          <SwiperSlide key={`${review.author_name}-${index}`}>
+        {displayReviews.map((review, index) => (
+          <SwiperSlide key={`${review.author_name}-${index}-${review.text.slice(0, 18)}`}>
             <article className="review-card">
-              <p className="review-stars">Valoracion: {renderRating(review.rating)}</p>
-              <p className="review-text">"{review.text || 'Opinion compartida por paciente.'}"</p>
-              <p className="review-author">{review.author_name || 'Paciente'}</p>
+              <header className="review-card-head">
+                <span className="review-avatar" aria-hidden="true">
+                  {getInitials(review.author_name || 'Paciente')}
+                </span>
+                <span className="review-meta">
+                  <strong className="review-name">{review.author_name || 'Paciente'}</strong>
+                  <span className="review-time">{review.relative_time_description || 'Reseña reciente'}</span>
+                </span>
+                <span className="review-google-mark" aria-hidden="true">
+                  <Image src="/Google__G__logo.svg" alt="" width={24} height={24} />
+                </span>
+              </header>
+              <p className="review-stars" aria-label={`Valoración ${clampRating(review.rating)} de 5`}>
+                {Array.from({ length: 5 }, (_, starIndex) => (
+                  <span
+                    key={starIndex}
+                    className={starIndex < clampRating(review.rating) ? 'star star-filled' : 'star'}
+                    aria-hidden="true"
+                  >
+                    ★
+                  </span>
+                ))}
+              </p>
+              <p className="review-text">{shortReviewText(review.text)}</p>
             </article>
           </SwiperSlide>
         ))}
