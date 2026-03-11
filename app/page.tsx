@@ -19,30 +19,63 @@ const phoneUrl = `tel:${PHONE_NUMBER}`;
 const mailUrl = `mailto:${CLINIC_EMAIL}`;
 const topBarPhoneUrl = `tel:${TOPBAR_PHONE_NUMBER}`;
 
+function getServiceWhatsappUrl(serviceName: string): string {
+  const message = encodeURIComponent(`Deseo reservar una cita para ${serviceName}`);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+}
+
 const features = [
   {
-    title: 'Implantología',
-    description: 'Recupera funcionalidad y estética con planes adaptados a cada caso clínico.'
+    title: 'Implantología dental',
+    icon: '/icons/implant-dark.svg',
+    description:
+      'Reponemos piezas perdidas con implantes biocompatibles y planificación digital para recuperar función, estabilidad y estética natural.'
   },
   {
-    title: 'Cirugía oral',
-    description: 'Procedimientos precisos, seguimiento cercano y una recuperación guiada paso a paso.'
+    title: 'Cirugía oral y periodontal',
+    icon: '/icons/oral-surgery.svg',
+    description:
+      'Realizamos intervenciones de encías, hueso y piezas complejas con técnicas mínimamente invasivas para una recuperación más cómoda.'
   },
   {
-    title: 'Ortodoncia',
-    description: 'Opciones invisibles y tradicionales para mejorar alineación, mordida y confort.'
+    title: 'Ortodoncia invisible y tradicional',
+    description:
+      'Corregimos alineación y mordida con alineadores transparentes o brackets, según lo que mejor encaje con tu caso y tu ritmo.'
   },
   {
-    title: 'Estética dental',
-    description: 'Tratamientos diseñados para lograr una sonrisa natural, equilibrada y saludable.'
+    title: 'Periodoncia y cuidado de encías',
+    description:
+      'Tratamos gingivitis y periodontitis para frenar su avance, proteger el soporte dental y mejorar la salud bucodental global.'
   },
   {
-    title: 'Periodoncia',
-    description: 'Cuidado integral de encías para prevenir molestias y proteger la salud bucodental.'
+    title: 'Odontología general y preventiva',
+    description:
+      'Incluimos revisiones, limpiezas y tratamientos conservadores para detectar a tiempo cualquier problema y evitar complicaciones.'
   },
   {
-    title: 'Odontología general',
-    description: 'Prevención, diagnóstico y tratamiento con tecnología actual y enfoque humano.'
+    title: 'Estética dental y blanqueamiento',
+    description:
+      'Mejoramos color, forma y armonía de la sonrisa con procedimientos personalizados que respetan la estructura natural de tus dientes.'
+  },
+  {
+    title: 'Odontopediatría',
+    description:
+      'Atendemos a niñas y niños en un entorno amable, centrado en prevención, educación y tratamientos adaptados a cada etapa.'
+  },
+  {
+    title: 'Diseño digital de sonrisa (DDS)',
+    description:
+      'Planificamos tu nueva sonrisa de forma digital para visualizar resultados antes de empezar y tomar decisiones con seguridad.'
+  },
+  {
+    title: 'Test bacteriológico oral',
+    description:
+      'Analizamos la flora oral para prevenir y tratar patologías con mayor precisión, ajustando el plan a tu perfil microbiológico.'
+  },
+  {
+    title: 'Atención para pacientes con odontofobia',
+    description:
+      'Aplicamos un protocolo específico para reducir ansiedad y recuperar la confianza en consulta desde una atención pausada y cercana.'
   }
 ];
 
@@ -328,10 +361,14 @@ export default function Home() {
           <div className="inner services-layout">
             <div className="services-top">
               <div className="services-intro">
-                <h2>Tratamientos dentales adaptados a tu ritmo</h2>
+                <h2>Nuestros servicios dentales, modernos y adaptados a ti</h2>
                 <p className="lead">
-                  Combinamos experiencia clínica y metodología para ofrecer soluciones eficaces, desde
-                  prevención y revisión hasta tratamientos avanzados.
+                  En Clínica Dental Don Benito desarrollamos servicios completos, desde revisiones
+                  preventivas hasta tratamientos avanzados y a la última, siempre con planes personalizados y
+                  seguimiento cercano.
+                  <br />
+                  La satisfacción de nuestros pacientes guía cada decisión: buscamos que vivas una
+                  atención cómoda, con resultados fiables y con la confianza que transmitimos a nuestros clientes.
                 </p>
               </div>
               <aside className="reviews-block" aria-label="Reseñas de pacientes">
@@ -343,8 +380,33 @@ export default function Home() {
             <div className="services-grid">
               {features.map((feature) => (
                 <article className="service-card" key={feature.title}>
-                  <h3>{feature.title}</h3>
-                  <p>{feature.description}</p>
+                  <div className="service-card-visual" aria-hidden="true">
+                    <span className="service-card-icon">
+                      {feature.icon ? (
+                        <Image
+                          src={feature.icon}
+                          alt=""
+                          width={100}
+                          height={100}
+                          className="service-card-icon-image"
+                        />
+                      ) : (
+                        '+'
+                      )}
+                    </span>
+                  </div>
+                  <div className="service-card-content">
+                    <h3>{feature.title}</h3>
+                    <p>{feature.description}</p>
+                  </div>
+                  <a
+                    className="service-book-btn"
+                    href={getServiceWhatsappUrl(feature.title)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Reserva cita
+                  </a>
                 </article>
               ))}
             </div>
