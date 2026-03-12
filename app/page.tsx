@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import ReviewsSlider from '../components/ReviewsSlider';
+import SectionNavObserver from '../components/SectionNavObserver';
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '34600000000';
 const WHATSAPP_TEXT =
@@ -498,6 +499,8 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      <SectionNavObserver />
 
       <a className="floating-wa" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp">
         WhatsApp
