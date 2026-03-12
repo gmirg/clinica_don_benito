@@ -502,8 +502,19 @@ export default function Home() {
 
       <SectionNavObserver />
 
-      <a className="floating-wa" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-        WhatsApp
+      <a
+        className="floating-wa"
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Contactar por WhatsApp"
+      >
+        <span className="floating-wa-icon" aria-hidden="true">
+          <Image src="/icons/whatsapp-floating.svg" alt="" width={30} height={30} />
+        </span>
+        <span className="floating-wa-label" aria-hidden="true">
+          Contáctanos
+        </span>
       </a>
     </>
   );

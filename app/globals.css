@@ -748,12 +748,63 @@ a {
   right: 1rem;
   bottom: 1rem;
   z-index: 60;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, var(--mint-500), var(--mint-600));
   color: #f6fffb;
-  font-weight: 800;
   border-radius: 999px;
-  padding: 0.82rem 1.16rem;
+  padding: 0;
   box-shadow: 0 14px 24px rgba(78, 126, 113, 0.35);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.floating-wa:hover,
+.floating-wa:focus-visible {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 18px 28px rgba(78, 126, 113, 0.4);
+}
+
+.floating-wa-icon {
+  width: 1.65rem;
+  height: 1.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-wa-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.floating-wa-label {
+  position: absolute;
+  right: calc(100% + 0.65rem);
+  top: 50%;
+  transform: translateY(-50%) translateX(12px) scale(0.92);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 0.5rem 0.86rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--mint-500), var(--mint-600));
+  color: #f7fffc;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 12px 20px rgba(78, 126, 113, 0.3);
+  transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.floating-wa:hover .floating-wa-label,
+.floating-wa:focus-visible .floating-wa-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
 }
 
 .reviews-wrapper {
@@ -1071,5 +1122,10 @@ a {
   .hero-photo,
   .hero-photo::before {
     animation: none;
+  }
+
+  .floating-wa,
+  .floating-wa-label {
+    transition: none;
   }
 }
