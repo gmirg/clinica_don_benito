@@ -40,6 +40,7 @@ const features = [
   {
     title: 'Ortodoncia invisible y tradicional',
     icon: '/icons/orthodontics.svg',
+    iconSize: 'large',
     description:
       'Corregimos alineación y mordida con alineadores transparentes o brackets, según lo que mejor encaje con tu caso y tu ritmo.'
   },
@@ -58,26 +59,31 @@ const features = [
   },
   {
     title: 'Estética dental y blanqueamiento',
+    icon: '/icons/teeth-aesthetics.svg',
     description:
       'Mejoramos color, forma y armonía de la sonrisa con procedimientos personalizados que respetan la estructura natural de tus dientes.'
   },
   {
     title: 'Odontopediatría',
+    icon: '/icons/pediatric-care.svg',
     description:
       'Atendemos a niñas y niños en un entorno amable, centrado en prevención, educación y tratamientos adaptados a cada etapa.'
   },
   {
     title: 'Diseño digital de sonrisa (DDS)',
+    icon: '/icons/digital-smile-design.svg',
     description:
       'Planificamos tu nueva sonrisa de forma digital para visualizar resultados antes de empezar y tomar decisiones con seguridad.'
   },
   {
     title: 'Test bacteriológico oral',
+    icon: '/icons/oral-bacteria-test.svg',
     description:
       'Analizamos la flora oral para prevenir y tratar patologías con mayor precisión, ajustando el plan a tu perfil microbiológico.'
   },
   {
     title: 'Atención para pacientes con odontofobia',
+    icon: '/icons/dental-phobia-care.svg',
     description:
       'Aplicamos un protocolo específico para reducir ansiedad y recuperar la confianza en consulta desde una atención pausada y cercana.'
   }
