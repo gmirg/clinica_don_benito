@@ -325,7 +325,7 @@ export default function Home() {
           <nav className="main-nav" aria-label="Navegación principal">
             <a href="#home">Inicio</a>
             <a href="#services">Servicios</a>
-            <a href="#about">Sobre nosotras</a>
+            <a href="#about">El Equipo</a>
             <a href="#philosophy-values">Filosofía y valores</a>
             <a href="#contact">Contacto</a>
           </nav>
@@ -430,26 +430,41 @@ export default function Home() {
         <section className="section section-about" id="about">
           <div className="inner about-grid">
             <div>
-              <h2>Un proyecto nacido para cuidar con cercanía y rigor profesional</h2>
+              <h2>El Equipo</h2>
               <p className="lead">
-                Somos un equipo femenino que entiende la odontología como una combinación de ciencia,
-                escucha y acompañamiento. Cada caso se aborda con respeto, criterio médico y atención
-                al detalle.
+                En Clínica Dental Don Benito hemos formado un equipo liderado por mujeres con una idea
+                muy clara: ofrecer una atención distinta, donde cada persona se sienta atendida con calma,
+                comprendida desde el primer momento y tratada con el respeto que merece.
+              </p>
+              <p className="lead">
+                Nuestra labor va más allá de resolver problemas dentales; trabajamos para que la salud
+                bucodental contribuya de verdad a tu bienestar, tu confianza y tu calidad de vida.
               </p>
             </div>
             <div className="about-cards">
-              <article>
-                <h3>Escucha activa</h3>
-                <p>Primero comprendemos tu situación para definir juntas el mejor camino.</p>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '0ms' }}>
+                <h3>Cercanía desde la primera visita</h3>
+                <p>Queremos que entres en consulta con tranquilidad y encuentres un trato humano, claro y sereno.</p>
               </article>
-              <article>
-                <h3>Decisión informada</h3>
-                <p>Te mostramos alternativas reales para que elijas con tranquilidad.</p>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '120ms' }}>
+                <h3>Atención que acompaña</h3>
+                <p>No nos limitamos al tratamiento: estamos a tu lado para orientarte y hacerte sentir segura en cada paso.</p>
               </article>
-              <article>
-                <h3>Continuidad clínica</h3>
-                <p>Seguimos tu evolución para mantener resultados funcionales y estables.</p>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '240ms' }}>
+                <h3>Salud oral con impacto real</h3>
+                <p>Entendemos la odontología como una forma de mejorar tu día a día, no solo como una intervención puntual.</p>
               </article>
+            </div>
+            <div className="about-gallery">
+              <figure className="about-gallery-item reveal-on-scroll" style={{ ['--reveal-delay' as string]: '60ms' }}>
+                <Image src="/team-1.webp" alt="Equipo de Clínica Dental Don Benito en consulta" width={1080} height={1350} />
+              </figure>
+              <figure className="about-gallery-item reveal-on-scroll" style={{ ['--reveal-delay' as string]: '180ms' }}>
+                <Image src="/team-2.webp" alt="Profesional de Clínica Dental Don Benito atendiendo a una paciente" width={1080} height={1350} />
+              </figure>
+              <figure className="about-gallery-item reveal-on-scroll" style={{ ['--reveal-delay' as string]: '300ms' }}>
+                <Image src="/team-3.webp" alt="Detalle del equipo de Clínica Dental Don Benito en la clínica" width={1080} height={1350} />
+              </figure>
             </div>
           </div>
           <WaveDivider variant="about" />

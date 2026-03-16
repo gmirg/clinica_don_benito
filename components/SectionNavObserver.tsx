@@ -10,6 +10,7 @@ export default function SectionNavObserver() {
     const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
       (section): section is HTMLElement => section instanceof HTMLElement
     );
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.reveal-on-scroll'));
     const header = document.querySelector<HTMLElement>('.site-header');
     const navToggle = document.getElementById('nav-menu-toggle') as HTMLInputElement | null;
 
@@ -102,6 +103,28 @@ export default function SectionNavObserver() {
       resizeObserver.observe(header);
     }
 
+    const revealObserver =
+      revealItems.length > 0
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  revealObserver?.unobserve(entry.target);
+                }
+              });
+            },
+            {
+              rootMargin: '0px 0px -12% 0px',
+              threshold: 0.2
+            }
+          )
+        : null;
+
+    revealItems.forEach((item) => {
+      revealObserver?.observe(item);
+    });
+
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
     window.addEventListener('hashchange', onHashChange);
@@ -115,6 +138,9 @@ export default function SectionNavObserver() {
       window.removeEventListener('hashchange', onHashChange);
       if (resizeObserver) {
         resizeObserver.disconnect();
+      }
+      if (revealObserver) {
+        revealObserver.disconnect();
       }
     };
   }, []);
