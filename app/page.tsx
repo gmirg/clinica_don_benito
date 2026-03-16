@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ReviewsSlider from '../components/ReviewsSlider';
 import SectionNavObserver from '../components/SectionNavObserver';
+import HeroPhoto from '../components/HeroPhoto';
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '34600000000';
 const WHATSAPP_TEXT =
@@ -355,15 +356,7 @@ export default function Home() {
               </div>
             </div>
 
-            <figure className="hero-photo" aria-label="Clínica Dental Don Benito">
-              <Image
-                src="/clinica-dental-don-benito.webp"
-                alt="Equipo de Clínica Dental Don Benito"
-                width={1200}
-                height={900}
-                className="hero-photo-image"
-              />
-            </figure>
+            <HeroPhoto />
           </div>
           <WaveDivider variant="home" />
         </section>
@@ -472,19 +465,70 @@ export default function Home() {
 
         <section className="section section-philosophy" id="philosophy-values">
           <div className="inner">
-            <h2>Creemos en una salud bucodental que impacta en tu bienestar diario</h2>
+            <div className="philosophy-intro">
+              <h2>Una manera de cuidar basada en confianza, prevención y excelencia</h2>
+              <p className="lead">
+                En Clínica Dental Don Benito entendemos que una sonrisa sana y armónica no depende solo
+                de resolver un problema puntual ni de contar con buena tecnología. También necesita un
+                trato cercano, explicaciones claras y la tranquilidad de saber que estás en manos de un
+                equipo que cuida de ti con criterio y honestidad.
+              </p>
+            </div>
+            <p>
+              Nuestra forma de trabajar une odontología actual, planificación personalizada y una
+              atención serena desde la primera visita. Estudiamos cada caso con una mirada global para
+              combinar prevención, diagnóstico preciso, funcionalidad y estética sin perder de vista lo
+              más importante: conservar al máximo la salud natural de tu boca y ayudarte a sentirte
+              segura durante todo el proceso.
+            </p>
+            <p>
+              Por eso hablamos de filosofía y valores, no solo de tratamientos. Lo que hacemos cada día
+              se apoya en principios muy concretos que definen cómo escuchamos, cómo explicamos, cómo
+              aplicamos la tecnología y cómo acompañamos a cada paciente a largo plazo.
+            </p>
             <div className="values-row">
-              <article>
-                <h3>Prevención como base</h3>
-                <p>Trabajamos a tiempo para evitar problemas mayores y mantener estabilidad oral.</p>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '40ms' }}>
+                <h3>Confianza y cercanía</h3>
+                <p>
+                  Creamos un entorno tranquilo, profesional y accesible para que puedas hablar con
+                  libertad, sentirte escuchada y vivir cada visita con más calma y menos tensión.
+                </p>
               </article>
-              <article>
-                <h3>Transparencia total</h3>
-                <p>Explicamos diagnóstico, proceso y evolución sin rodeos ni tecnicismos innecesarios.</p>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '120ms' }}>
+                <h3>Innovación y tecnología</h3>
+                <p>
+                  Incorporamos diagnóstico digital y recursos avanzados que nos permiten trabajar con
+                  más precisión, más seguridad y tratamientos más cómodos para cada paciente.
+                </p>
               </article>
-              <article>
-                <h3>Excelencia cercana</h3>
-                <p>Unimos conocimiento tecnico y trato humano en cada cita.</p>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '200ms' }}>
+                <h3>Transparencia y comunicación</h3>
+                <p>
+                  Explicamos el diagnóstico, las alternativas de tratamiento, los tiempos y la
+                  planificación económica con un lenguaje claro, sin rodeos ni sorpresas innecesarias.
+                </p>
+              </article>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '280ms' }}>
+                <h3>Calidad y excelencia</h3>
+                <p>
+                  Trabajamos con materiales contrastados, protocolos rigurosos y colaboradores de
+                  confianza para lograr resultados estables, funcionales y estéticamente cuidados.
+                </p>
+              </article>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '360ms' }}>
+                <h3>Prevención y bienestar</h3>
+                <p>
+                  Damos prioridad a la revisión periódica, la higiene profesional y la educación
+                  bucodental para evitar problemas mayores y proteger tu salud en el largo plazo.
+                </p>
+              </article>
+              <article className="reveal-on-scroll" style={{ ['--reveal-delay' as string]: '440ms' }}>
+                <h3>Compromiso humano</h3>
+                <p>
+                  Detrás de cada cita hay un equipo implicado de verdad, con vocación, empatía y
+                  responsabilidad, que busca que te sientas cuidada antes, durante y después del
+                  tratamiento.
+                </p>
               </article>
             </div>
           </div>

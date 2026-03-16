@@ -61,6 +61,7 @@ a {
 
 p {
   font-size: 1.2rem;
+  line-height: 1.6;
 }
 
 .inner {
@@ -415,14 +416,12 @@ p {
 .hero-copy p {
   margin: 0;
   color: var(--ink-500);
-  line-height: 1.6;
   max-width: 66ch;
 }
 
 .lead {
   margin: 0;
   color: var(--ink-500);
-  line-height: 1.6;
   max-width: 66ch;
 }
 
@@ -458,6 +457,8 @@ p {
   transform: rotate(-8deg);
   z-index: 0;
   animation: hero-blob-breath 8.6s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.42s ease;
 }
 
 .hero-photo-image {
@@ -472,6 +473,20 @@ p {
   box-shadow:
     0 16px 46px rgba(49, 106, 92, 0.3),
     0 6px 18px rgba(49, 106, 92, 0.2);
+  opacity: 0;
+  transform: translate3d(0, 8px, 0) scale(0.985);
+  transition:
+    opacity 0.42s ease,
+    transform 0.52s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero-photo.is-ready::before {
+  opacity: 1;
+}
+
+.hero-photo.is-ready .hero-photo-image {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 @keyframes hero-float {
@@ -601,7 +616,6 @@ p {
 .service-card p {
   margin: 0;
   max-width: 26ch;
-  line-height: 1.45;
   color: var(--ink-700);
 }
 
@@ -665,6 +679,13 @@ p {
   align-items: start;
 }
 
+.philosophy-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  gap: 1.4rem;
+  align-items: center;
+}
+
 .about-cards {
   display: grid;
   gap: 1rem;
@@ -681,6 +702,7 @@ p {
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.58);
   padding: 1.2rem 1.15rem;
+  box-shadow: 0 12px 28px rgba(78, 126, 113, 0.14);
 }
 
 .about-cards h3,
@@ -694,7 +716,6 @@ p {
 .values-row p {
   margin: 0.8rem 0 0;
   color: var(--ink-700);
-  line-height: 1.5;
 }
 
 .about-gallery {
@@ -780,10 +801,35 @@ p {
 }
 
 .values-row {
-  margin-top: 1rem;
+  margin-top: 4rem;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.78rem;
+  gap: 3rem;
+}
+
+.section-philosophy .lead,
+.section-philosophy p {
+  color: var(--ink-700);
+}
+
+.section-philosophy .values-row article {
+  padding: 1.5rem 1.45rem 1.6rem;
+}
+
+.section-philosophy h2 {
+  font-size: clamp(2.6rem, 5vw, 3.75rem);
+}
+
+.section-philosophy .inner > p + p {
+  margin-top: 1.15rem;
+}
+
+.philosophy-intro .lead {
+  margin: 0;
+  align-self: center;
+  text-align: justify;
+  text-wrap: pretty;
+  padding-right: 2.5rem;
 }
 
 .contact-layout {
@@ -1041,7 +1087,6 @@ p {
 .review-text {
   margin: 0.9rem 0 0;
   color: var(--ink-700);
-  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
@@ -1126,8 +1171,13 @@ p {
   .hero-grid,
   .services-top,
   .about-grid,
+  .philosophy-intro,
   .contact-layout {
     grid-template-columns: 1fr;
+  }
+
+  .philosophy-intro .lead {
+    padding-right: 0;
   }
 
   .hero-copy h1 {
