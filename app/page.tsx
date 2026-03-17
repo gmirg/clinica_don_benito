@@ -2,6 +2,7 @@ import Image from 'next/image';
 import ReviewsSlider from '../components/ReviewsSlider';
 import SectionNavObserver from '../components/SectionNavObserver';
 import HeroPhoto from '../components/HeroPhoto';
+import SiteFooter from '../components/SiteFooter';
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '34600000000';
 const WHATSAPP_TEXT =
@@ -537,27 +538,48 @@ export default function Home() {
 
         <section className="section section-contact section-last" id="contact">
           <div className="inner contact-layout">
-            <div>
-              <h2>Tu siguiente paso dental puede empezar hoy</h2>
-              <p className="lead">
-                Si quieres valorar tu caso, resolver una molestia o planificar un tratamiento, estamos
-                disponibles para ayudarte de forma rápida y clara.
-              </p>
+            <div className="contact-panel">
+              <div className="contact-copy">
+                <h2>Tu cuidado dental puede empezar hoy</h2>
+                <p className="lead">
+                  Si quieres valorar tu caso, resolver una molestia o planificar un tratamiento, estamos
+                  disponibles para ayudarte de forma rápida y clara.
+                </p>
+              </div>
+              <div className="contact-summary">
+                <p>
+                  <strong>Clínica Dental Don Benito</strong>
+                </p>
+                <p>C/ Ayala, 4, 06400 Don Benito, Badajoz</p>
+                <p>640 93 75 67</p>
+                <p>Horario: {scheduleText}</p>
+              </div>
+              <div className="contact-actions">
+                <a className="btn btn-primary" href={whatsappUrl} target="_blank" rel="noreferrer">
+                  Hablar por WhatsApp
+                </a>
+                <a className="btn btn-soft" href={topBarPhoneUrl}>
+                  Llamar al 640 93 75 67
+                </a>
+                <a className="btn btn-outline" href={mailUrl}>
+                  Escribir por email
+                </a>
+              </div>
             </div>
-            <div className="contact-actions">
-              <a className="btn btn-primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                Hablar por WhatsApp
-              </a>
-              <a className="btn btn-soft" href={phoneUrl}>
-                Llamar al {PHONE_DISPLAY}
-              </a>
-              <a className="btn btn-outline" href={mailUrl}>
-                Escribir por email
-              </a>
+            <div className="contact-map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d516.1186910961178!2d-5.861203460148468!3d38.9615116389385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd145b969ecbd2cd%3A0x6ba17df8725fd07c!2sClinica%20Dental%20Don%20Benito!5e0!3m2!1sen!2ses!4v1773769368979!5m2!1sen!2ses"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                title="Mapa de Clínica Dental Don Benito"
+              />
             </div>
           </div>
         </section>
       </main>
+
+      <SiteFooter />
 
       <SectionNavObserver />
 
