@@ -70,22 +70,59 @@ npm run build
 npm run start
 ```
 
-## Despliegue en BanaHosting (Node)
+## Despliegue en BanaHosting sin SSH
 
-1. Subir proyecto al servidor (incluyendo `app`, `components`, `lib`, `public`, `package.json`, `server.js`).
-2. En cPanel abrir `Setup Node.js App`.
-3. Elegir version de Node compatible (20+ recomendado).
-4. Seleccionar carpeta del proyecto.
-5. Startup file: `server.js`.
-6. Configurar variables de entorno.
-7. Para staging usar:
-   - `APP_STAGE=staging`
-   - `SITE_URL=https://staging.tu-dominio.com`
-8. Para produccion final usar:
-   - `APP_STAGE=production`
-   - `SITE_URL=https://clinicadentaldonbenito.com`
-9. Ejecutar instalacion de dependencias y luego `npm run build`.
-10. Reiniciar la app Node.
+Este hosting no permite SSH externo, asi que el flujo recomendado es:
+
+1. generar la build en local
+2. empaquetar un ZIP con solo lo necesario
+3. subir ese ZIP por `File Manager` o `FTP`
+4. extraerlo dentro de la carpeta de la app Node
+5. reiniciar la app desde `Setup Node.js App`
+
+### Generar paquete de despliegue
+
+```bash
+npm install
+npm run deploy:package
+```
+
+Ese comando:
+
+- ejecuta `npm run build`
+- crea la carpeta `deploy/`
+- genera un ZIP con timestamp listo para BanaHosting
+
+Incluye solo:
+
+- `.next/`
+- `app/`
+- `components/`
+- `lib/`
+- `public/`
+- `package.json`
+- `package-lock.json`
+- `next.config.mjs`
+- `server.js`
+- `tsconfig.json`
+- `next-env.d.ts`
+
+No incluye:
+
+- `node_modules/`
+- `.git/`
+- `.env*`
+- caches locales que no hagan falta
+
+### Pasos en BanaHosting
+
+1. Abre `File Manager` o conecta por `FTP`.
+2. Entra en la carpeta raiz de la app Node, por ejemplo `~/clinica-don-benito`.
+3. Sube el ZIP generado en `deploy/`.
+4. Extraelo dentro de esa carpeta, sobrescribiendo archivos.
+5. En `Setup Node.js App`, pulsa `Restart`.
+
+Si cambias dependencias en `package.json`, tendras que pedir a BanaHosting o usar el panel si lo permite para reinstalar dependencias dentro de la app. Si no cambian dependencias, normalmente basta con subir el nuevo ZIP y reiniciar.
 
 ### Configuracion exacta recomendada
 
@@ -99,7 +136,7 @@ Ejemplo:
 
 Valores en `Setup Node.js App`:
 
-- `Node.js version`: `20.x`
+- `Node.js version`: `18.x`
 - `Application mode`: `Production`
 - `Application root`: `clinica-don-benito`
 - `Application URL`: `/`
@@ -118,32 +155,14 @@ Variables de entorno minimas para staging:
 - `GOOGLE_PLACE_ID=...`
 - `REVIEWS_CACHE_TTL_HOURS=6`
 
-Comandos de primer despliegue desde `Terminal`:
-
-```bash
-cd ~/clinica-don-benito
-npm ci
-npm run build
-```
-
-Comandos de actualizacion cuando hagas cambios:
-
-```bash
-cd ~/clinica-don-benito
-git pull origin main
-npm ci
-npm run build
-```
-
-Despues de cada build, reinicia la app desde `Setup Node.js App`.
-
 Cuando llegue el momento de salir a dominio final:
 
 - cambias el dominio de la app a `clinicadentaldonbenito.com`
 - dejas `Application URL` en `/`
 - cambias `APP_STAGE=production`
 - cambias `SITE_URL=https://clinicadentaldonbenito.com`
-- haces `npm run build`
+- generas un ZIP nuevo con `npm run deploy:package`
+- subes y extraes el ZIP en la app
 - reinicias la app
 
 ## Estrategia recomendada de salida

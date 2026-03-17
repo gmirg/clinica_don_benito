@@ -6,7 +6,8 @@
     "dev": "rm -rf .next-dev .next && next dev -p 3001",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "start:next": "next start"
+    "start:next": "next start",
+    "deploy:package": "bash scripts/package-banahosting.sh"
   },
   "dependencies": {
     "next": "^14.2.33",
