@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import type { Review, ReviewsPayload } from '../lib/reviews';
-import { fallbackReviews } from '../lib/reviews';
+import { manualReviewsPayload } from '../lib/reviews';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -35,12 +35,12 @@ function shortReviewText(text: string): string {
     return 'Opinión compartida por paciente.';
   }
 
-  return cleanText.length > 210 ? `${cleanText.slice(0, 207).trimEnd()}...` : cleanText;
+  return cleanText.length > 150 ? `${cleanText.slice(0, 147).trimEnd()}...` : cleanText;
 }
 
 function ensureMinimumSlides(sourceReviews: Review[], minimum = 5): Review[] {
   if (sourceReviews.length === 0) {
-    return fallbackReviews.slice(0, minimum);
+    return manualReviewsPayload.reviews.slice(0, minimum);
   }
 
   if (sourceReviews.length >= minimum) {
@@ -58,8 +58,9 @@ function ensureMinimumSlides(sourceReviews: Review[], minimum = 5): Review[] {
 }
 
 export default function ReviewsSlider() {
-  const [reviews, setReviews] = useState<Review[]>(fallbackReviews);
-  const [sourceName, setSourceName] = useState<string>('Pacientes');
+  const [reviews, setReviews] = useState<Review[]>(manualReviewsPayload.reviews);
+  const [sourceName, setSourceName] = useState<string>(manualReviewsPayload.place_name);
+  const [reviewsUrl, setReviewsUrl] = useState<string | undefined>(manualReviewsPayload.google_maps_url);
 
   useEffect(() => {
     let mounted = true;
@@ -78,6 +79,7 @@ export default function ReviewsSlider() {
 
         setReviews(data.reviews);
         setSourceName(data.place_name || 'Google Reviews');
+        setReviewsUrl(data.google_maps_url || manualReviewsPayload.google_maps_url);
       } catch {
         // Keep fallback content if API is unavailable.
       }
@@ -94,7 +96,19 @@ export default function ReviewsSlider() {
 
   return (
     <div className="reviews-wrapper">
-      <p className="reviews-source">Reseñas de {sourceName}</p>
+      <div className="reviews-header">
+        <p className="reviews-source">Reseñas de {sourceName}</p>
+        {reviewsUrl ? (
+          <a
+            className="reviews-link"
+            href={reviewsUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Ver en Google
+          </a>
+        ) : null}
+      </div>
       <Swiper
         className="reviews-carousel"
         modules={[Autoplay, Pagination, Navigation]}
@@ -110,8 +124,8 @@ export default function ReviewsSlider() {
         breakpoints={{
           0: { slidesPerView: 1.08, spaceBetween: 12 },
           680: { slidesPerView: 1.35, spaceBetween: 14 },
-          980: { slidesPerView: 2.2, spaceBetween: -48 },
-          1280: { slidesPerView: 3, spaceBetween: -72 }
+          980: { slidesPerView: 2.2, spaceBetween: -20 },
+          1280: { slidesPerView: 3, spaceBetween: -28 }
         }}
       >
         {displayReviews.map((review, index) => (

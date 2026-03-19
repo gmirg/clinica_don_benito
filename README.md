@@ -15,6 +15,7 @@ Proyecto migrado a una sola aplicacion Next.js con TypeScript.
 - `app/page.tsx`: one page principal
 - `components/ReviewsSlider.tsx`: slider de resenas (cliente)
 - `app/api/reviews/route.ts`: API para Google Reviews con cache en memoria
+- `lib/reviews.ts`: resenas manuales usadas como fallback y como modo actual sin Google API
 - `server.js`: servidor Node para despliegue en BanaHosting (Setup Node.js App)
 
 ## Variables de entorno
@@ -37,6 +38,10 @@ Variables:
 - `GOOGLE_PLACES_API_KEY`: API key con Places API habilitada
 - `GOOGLE_PLACE_ID`: Place ID de la clinica
 - `REVIEWS_CACHE_TTL_HOURS`: horas de cache (6 recomendado)
+
+Si no quieres activar todavia Google Places API, deja `GOOGLE_PLACES_API_KEY` y `GOOGLE_PLACE_ID`
+sin configurar. En ese caso la web usara automaticamente las resenas manuales definidas en
+`lib/reviews.ts`.
 
 ## Desarrollo local
 
@@ -183,7 +188,7 @@ Cuando llegue el momento de salir a dominio final:
 
 - `GET /api/health`: estado basico del servicio
 - `GET /api/reviews`: devuelve resenas de Google (con cache)
-  Si falta configuracion de Google o hay error externo, responde fallback de forma segura.
+  Si falta configuracion de Google o hay error externo, responde fallback manual de forma segura.
 
 ## Nota sobre estructura antigua
 

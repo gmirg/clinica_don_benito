@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { fallbackReviews, type Review, type ReviewsPayload } from '../../../lib/reviews';
+import { manualReviewsPayload, type Review, type ReviewsPayload } from '../../../lib/reviews';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -73,8 +73,7 @@ async function fetchGoogleReviews(): Promise<ReviewsPayload> {
 
 function buildFallbackPayload(errorMessage?: string): ReviewsPayload & { fallback: true; error?: string } {
   return {
-    place_name: 'Clinica Dental Don Benito',
-    reviews: fallbackReviews,
+    ...manualReviewsPayload,
     cached: false,
     fallback: true,
     ...(errorMessage ? { error: errorMessage } : {})
