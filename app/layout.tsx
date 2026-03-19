@@ -4,11 +4,42 @@ import './globals.css';
 const appStage = process.env.APP_STAGE || 'staging';
 const isProduction = appStage === 'production';
 const siteUrl = process.env.SITE_URL || 'https://staging.example.com';
+const siteTitle = 'Clínica Dental Don Benito';
+const siteDescription = 'Odontología integral para toda la familia en Don Benito.';
 
 export const metadata: Metadata = {
-  title: 'Clinica Dental Don Benito',
-  description: 'Odontologia integral para toda la familia en Don Benito.',
+  title: {
+    default: siteTitle,
+    template: `%s | ${siteTitle}`
+  },
+  description: siteDescription,
   metadataBase: new URL(siteUrl),
+  applicationName: siteTitle,
+  alternates: {
+    canonical: '/'
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    url: siteUrl,
+    siteName: siteTitle,
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: `${siteTitle} - Odontología integral para toda la familia`
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteTitle,
+    description: siteDescription,
+    images: ['/opengraph-image']
+  },
   robots: isProduction
     ? {
         index: true,
