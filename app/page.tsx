@@ -4,13 +4,13 @@ import SectionNavObserver from '../components/SectionNavObserver';
 import HeroPhoto from '../components/HeroPhoto';
 import SiteFooter from '../components/SiteFooter';
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '34600000000';
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '34640937567';
 const WHATSAPP_TEXT =
   process.env.NEXT_PUBLIC_WHATSAPP_TEXT ||
   'Hola%20quiero%20pedir%20una%20cita%20en%20Cl%C3%ADnica%20Dental%20Don%20Benito';
 const PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER || '924857567';
 const PHONE_DISPLAY = process.env.NEXT_PUBLIC_PHONE_DISPLAY || '924 857 567';
-const CLINIC_EMAIL = process.env.NEXT_PUBLIC_CLINIC_EMAIL || 'hola@clinicadentaldonbenito.es';
+const CLINIC_EMAIL = process.env.NEXT_PUBLIC_CLINIC_EMAIL || 'hola@clinicadentaldonbenito.com';
 const TOPBAR_PHONE_NUMBER = process.env.NEXT_PUBLIC_TOPBAR_PHONE_NUMBER || '640937567';
 const TOPBAR_PHONE_DISPLAY = process.env.NEXT_PUBLIC_TOPBAR_PHONE_DISPLAY || '640 937 567';
 const INSTAGRAM_URL = 'https://www.instagram.com/clinicadentaldonbenito/';
@@ -244,6 +244,28 @@ function InstagramIcon() {
       <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" strokeWidth="1.8" />
       <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth="1.8" />
       <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
+function EmailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M4.5 6.5h15a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16V8a1.5 1.5 0 0 1 1.5-1.5Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="m4 7 8 6 8-6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -551,7 +573,18 @@ export default function Home() {
                   <strong>Clínica Dental Don Benito</strong>
                 </p>
                 <p>C/ Ayala, 4, 06400 Don Benito, Badajoz</p>
-                <p>640 93 75 67</p>
+                <p className="contact-summary-item">
+                  <span className="contact-summary-icon" aria-hidden="true">
+                    <PhoneIcon />
+                  </span>
+                  <a href={topBarPhoneUrl}>640 937 567</a>
+                </p>
+                <p className="contact-summary-item">
+                  <span className="contact-summary-icon" aria-hidden="true">
+                    <EmailIcon />
+                  </span>
+                  <a href={mailUrl}>{CLINIC_EMAIL}</a>
+                </p>
                 <p>Horario: {scheduleText}</p>
               </div>
               <div className="contact-actions">
@@ -591,7 +624,7 @@ export default function Home() {
         aria-label="Contactar por WhatsApp"
       >
         <span className="floating-wa-icon" aria-hidden="true">
-          <Image src="/icons/whatsapp-floating.svg" alt="" width={30} height={30} />
+          <Image src="/icons/whatsapp-floating.svg" alt="" width={40} height={40} />
         </span>
         <span className="floating-wa-label" aria-hidden="true">
           Contáctanos

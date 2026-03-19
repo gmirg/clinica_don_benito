@@ -151,11 +151,11 @@ Variables de entorno minimas para staging:
 
 - `APP_STAGE=staging`
 - `SITE_URL=https://donbenito-staging.tu-dominio-actual.com`
-- `NEXT_PUBLIC_WHATSAPP_NUMBER=34600000000`
+- `NEXT_PUBLIC_WHATSAPP_NUMBER=34640937567`
 - `NEXT_PUBLIC_WHATSAPP_TEXT=Hola%20quiero%20pedir%20una%20cita%20en%20Clinica%20Dental%20Don%20Benito`
 - `NEXT_PUBLIC_PHONE_NUMBER=924857567`
 - `NEXT_PUBLIC_PHONE_DISPLAY=924 857 567`
-- `NEXT_PUBLIC_CLINIC_EMAIL=hola@clinicadentaldonbenito.es`
+- `NEXT_PUBLIC_CLINIC_EMAIL=hola@clinicadentaldonbenito.com`
 - `GOOGLE_PLACES_API_KEY=...`
 - `GOOGLE_PLACE_ID=...`
 - `REVIEWS_CACHE_TTL_HOURS=6`

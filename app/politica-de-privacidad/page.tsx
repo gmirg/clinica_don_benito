@@ -25,10 +25,10 @@ export default function PrivacyPolicyPage() {
             <strong>Teléfono:</strong> 640 937 567
           </li>
           <li>
-            <strong>Correo electrónico:</strong> hola@clinicadentaldonbenito.es
+            <strong>Correo electrónico:</strong> hola@clinicadentaldonbenito.com
           </li>
           <li>
-            <strong>Sitio web:</strong> clinicadentaldonbenito.es
+            <strong>Sitio web:</strong> clinicadentaldonbenito.com
           </li>
         </ul>
       </section>
@@ -96,7 +96,7 @@ export default function PrivacyPolicyPage() {
           <li>Retirar el consentimiento en cualquier momento, cuando esa sea la base jurídica.</li>
         </ul>
         <p>
-          Para ejercer estos derechos puedes escribir a <strong>hola@clinicadentaldonbenito.es</strong> o
+          Para ejercer estos derechos puedes escribir a <strong>hola@clinicadentaldonbenito.com</strong> o
           dirigirte a la clínica en <strong>C/ Ayala, 4, 06400 Don Benito, Badajoz</strong>. Si consideras
           que el tratamiento no se ajusta a la normativa, también puedes presentar una reclamación ante
           la Agencia Española de Protección de Datos.

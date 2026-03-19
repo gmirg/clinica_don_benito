@@ -39,10 +39,10 @@ export default function LegalNoticePage() {
             <strong>Teléfono de contacto:</strong> 640 937 567
           </li>
           <li>
-            <strong>Correo electrónico:</strong> hola@clinicadentaldonbenito.es
+            <strong>Correo electrónico:</strong> hola@clinicadentaldonbenito.com
           </li>
           <li>
-            <strong>Sitio web:</strong> clinicadentaldonbenito.es
+            <strong>Sitio web:</strong> clinicadentaldonbenito.com
           </li>
         </ul>
       </section>
@@ -126,7 +126,7 @@ export default function LegalNoticePage() {
         <h2>9. Contacto</h2>
         <p>
           Para cualquier consulta relacionada con este aviso legal o con el funcionamiento del sitio
-          web, puedes escribir a <strong>hola@clinicadentaldonbenito.es</strong> o dirigirte a la clínica
+          web, puedes escribir a <strong>hola@clinicadentaldonbenito.com</strong> o dirigirte a la clínica
           en <strong>C/ Ayala, 4, 06400 Don Benito, Badajoz</strong>.
         </p>
       </section>
